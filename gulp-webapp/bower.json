@@ -1,0 +1,24 @@
+{
+  "name": "gulp-webapp",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "bootstrap-fileinput": "~4.2.5",
+    "modernizr": "~2.8.1",
+    "socket.io-client": "~1.3.6"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "less/bootstrap.less",
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js",
+        "dist/fonts/*"
+      ]
+    }
+  },
+  "devDependencies": {
+    "chai": "~3.2.0",
+    "mocha": "~2.2.5"
+  }
+}

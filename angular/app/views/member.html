@@ -1,0 +1,131 @@
+<!-- style -->
+<style>
+    a:link {text-decoration: none;}
+    a:visited {text-decoration: none;}
+    a:hover {text-decoration: none;}
+    a:active {text-decoration: none;}
+</style>
+
+<!-- html -->
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="text-center text-primary">Member</h1>
+        <p class="text-center">We are a group of skilled individuals.</p>
+        <br>
+    </div>
+</div>
+
+<!-- 검색 -->
+<div class="row">
+    <div class="col-lg-11" style="padding-bottom:20px">
+        <div class="input-group">
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-search"></span>
+            </span>
+            <input type="text" class="form-control" placeholder="맴버 검색..." ng-model="memberQuery[memberQueryBy]">
+        </div><!-- /input-group -->
+    </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
+
+<ul class="nav nav-tabs">
+    <li role="presentation" ng-click="selectTab('bookmarks')" ng-class="(selectedTab === 'bookmarks') ? 'active' : ''">
+        <a href="">
+            <span class="glyphicon glyphicon-bookmark" aria-hidden="true"> Bookmarks</span>
+        </a>
+    </li>
+    <li role="presentation" ng-click="selectTab('members')" ng-class="(selectedTab === 'members') ? 'active' : ''">
+        <a href="">
+            <span class="glyphicon glyphicon-th-list" aria-hidden="true"> Members</span>
+        </a>
+    </li>
+</ul>
+
+<!-- 북마크 리스트 -->
+<div class="row" style="margin-top: 30px;" ng-class="(selectedTab === 'bookmarks') ? '' : 'hidden'">
+    <div class="row text-center"  ng-class="(bookmarks.length === 0) ? '' : 'hidden'"
+         style="margin-top: 30px; color: #31708f; font-size: medium">북마크 한 회원이 없습니다.</div>
+    <a href="" ng-click="$event.preventDefault(); memberModalOn(bookmark.id)" ng-repeat="bookmark in bookmarks | filter:memberQuery">
+        <div class="col-xs-6 col-md-3 col-lg-2" style="padding: 15px; text-align:center;">
+            <img ng-src="{{bookmark.img}}"
+                 class="center-block img-circle" width="96" height="96">
+            <h3 class="text-center">
+                {{bookmark.name}}
+            </h3>
+            <p class="user_id text-center">{{bookmark.id}}</p>
+            <br><br>
+        </div>
+    </a>
+</div>
+
+<!-- 전체 맴버 리스트 -->
+<div class="row hidden" style="margin-top: 30px;" ng-class="(selectedTab === 'members') ? '' : 'hidden'">
+    <a href="" ng-click="$event.preventDefault(); memberModalOn(member.id)" ng-repeat="member in members | filter:memberQuery">
+        <div class="col-xs-6 col-md-3 col-lg-2" style="padding: 15px; text-align:center;">
+            <img ng-src="{{member.img}}"
+                 class="center-block img-circle" width="96" height="96">
+            <h3 class="text-center">
+                {{member.name}}
+            </h3>
+            <p class="user_id text-center">{{member.id}}</p>
+            <br><br>
+        </div>
+    </a>
+</div>
+
+<!-- 맴버 MODAL -->
+<script type="text/ng-template" id="memberModal.html">
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">맴버 정보</h4>
+                </div>
+                <form class="form-horizontal" role="form">
+                    <div class="modal-body">
+                        <div class="well well-lg">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <img ng-src="{{selectedMember.img}}"
+                                         class="center-block img-circle user_img"
+                                         style="padding: 15px;" width="250" height="250"/>
+                                </div>
+                                <div class="col-sm-6">
+                                    <ul class="list-unstyled" style="line-height:1.77;">
+                                        <!-- 아이디 -->
+                                        <li>{{selectedMember.id}}</li>
+                                        <!-- 이름 -->
+                                        <li>{{selectedMember.name}}</li>
+                                        <!-- 폰 번호 -->
+                                        <li>{{selectedMember.phone}}</li>
+                                        <!-- 이메일 -->
+                                        <li>{{selectedMember.email}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="alert"
+                             ng-class="(bookmarkAlert.flag === 'success' ? 'alert alert-success' :
+                                    (bookmarkAlert.flag === 'danger' ? 'alert alert-danger':
+                                    (bookmarkAlert.flag === 'warning' ? 'alert alert-warning' : 'hidden')))" >
+                            <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
+                            {{bookmarkAlert.text}}
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-warning" ng-click="removeBookmark(selectedMember.id)" ng-class="(bookmark) ? '' : 'hidden'">
+                            <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> 북마크 해제
+                        </a>
+                        <a class="btn btn-info" ng-click="addBookmark(selectedMember.id)" ng-class="(bookmark) ? 'hidden' : ''">
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span> 북마크
+                        </a>
+                        <a class="btn btn-primary" ng-click="close('visit')">
+                            <span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> 방문하기
+                        </a>
+                        <a class="btn btn-default" data-dismiss="modal">닫기</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</script>

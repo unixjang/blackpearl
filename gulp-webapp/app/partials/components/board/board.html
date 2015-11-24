@@ -1,0 +1,159 @@
+<!-- script -->
+<script type="text/javascript" src="partials/components/board/boardCtrl.js"></script>
+
+<!-- html -->
+<div class="row">
+    <!-- 게시판 그룹 : header -->
+    <div class="row" style="margin: 20px;">
+        <div id="boardgrp" class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                    style="width: 90px">
+                전체 <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="#">전체</a></li>
+                <li><a href="#">회사</a></li>
+                <li><a href="#">개인</a></li>
+            </ul>
+        </div>
+        <button id="board_add" style="margin-left: 10px;" type="button" class="btn btn-default" data-toggle="modal" data-target="#boardGrpAddModal">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 게시판 추가
+        </button>
+    </div>
+
+    <!-- 게시판 -->
+    <div class="col-md-12 table-responsive">
+        <table id="myBoard" class="table table-hover table-striped" data-pagination="true" data-search="true">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Username</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr class='board_list' data-toggle='modal' data-target='#readModal' data-id="1">
+                    <td>1</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr class='board_list' data-toggle='modal' data-target='#readModal' data-id="2">
+                    <td>2</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                <tr class='board_list' data-toggle='modal' data-target='#readModal' data-id="3">
+                    <td>3</td>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <p><a class="btn btn-primary pull-right" data-toggle="modal" data-target="#writeModal">글쓰기</a></p>
+    </div>
+</div>
+
+<!-- 게시판 추가 MODAL -->
+<div class="modal fade" id="boardGrpAddModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">게시판 추가</h4>
+            </div>
+            <form id="board_grp_add" class="form-horizontal" role="form">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input name="title" type="text" class="form-control" placeholder="게시판 이름">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">추가</button>
+                    <a class="btn btn-default" data-dismiss="modal">닫기</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- 글쓰기 MODAL -->
+<div class="modal fade" id="writeModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">글쓰기</h4>
+            </div>
+            <form class="form-horizontal" role="form">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input name="title" type="text" class="form-control" placeholder="제 목">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <textarea name="content" class="form-control" rows="8" placeholder="내 용"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input name="upload" type="file" class="fileinput" data-preview-file-type="text" multiple>
+                            <!--<div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                <div class="form-control" data-trigger="fileinput">
+                                    <i class="glyphicon glyphicon-file fileinput-exists"></i>
+                                    <span class="fileinput-filename"></span>
+                                </div>
+                                <span class="input-group-addon btn btn-default btn-file">
+                                    <span class="fileinput-new">파일 선택</span>
+                                    <span class="fileinput-exists">수정</span>
+                                    <input type="file" name="file">
+                                </span>
+                                <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">삭제</a>
+                            </div>-->
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-default" data-dismiss="modal">닫기</a>
+                    <a class="btn btn-primary">글쓰기</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- 글보기 MODAL -->
+<div class="modal fade" id="readModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Title <span class="badge">0</span></h4>
+            </div>
+            <form class="form-horizontal" role="form">
+                <div class="modal-body">
+                    <p class="content">Content</p>
+                    <hr>
+                    <div class="file">
+                        <p><a href="#">asdf.png</a></p>
+                        <p><a href="#">asdf.png</a></p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a id="btn_update" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#writeModal">수정</a>
+                    <a id="btn_delete" class="btn btn-warning" data-dismiss="modal">삭제</a>
+                    <a class="btn btn-default" data-dismiss="modal">닫기</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

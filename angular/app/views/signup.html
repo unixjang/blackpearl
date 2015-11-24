@@ -1,0 +1,72 @@
+<script>
+    $("#file-3").fileinput({
+        'allowedFileExtensions' : ['jpg', 'png','gif'],
+        showUpload: false,
+        showCaption: false,
+        browseClass: "btn btn-primary btn-sm",
+        /*fileType: "any",*/
+        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>"
+    });
+</script>
+
+<!--login modal-->
+<div tabindex="-1" aria-hidden="true">
+  <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
+  <h2 class="text-center">Register</h2>
+</div>
+<form id="signupForm" name="signupForm" enctype="multipart/form-data" method="post" class="form center-block">
+    <p> Welcome : {{user.id}} </p>
+    <div class="form-group input-group">
+    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+    <input name="id" type="text" class="form-control" placeholder="아이디" ng-model="user.id" ng-minlength="6" ng-change="isAlphaNumeric()" required>
+    </div>
+    <div class="form-group input-group">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+        <input name="pw" type="password" class="form-control" placeholder="암호" ng-model="user.pw" ng-change="isValidPassword()" ng-minlength="8" required>
+    </div>
+    <div class="form-group input-group">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+        <input name="pwOk" type="password" placeholder="암호 확인" class="form-control" ng-model="user.pwOk" ng-change="checkPwMatch()"/>
+    </div>
+    <div class="form-group input-group">
+        <label>사진 업로드</label>
+        <input id="file-3" name="image" type="file" file="file">
+    </div>
+    <div class="form-group input-group">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-tag"></span></span>
+        <input name="name" type="text" placeholder="이름" ng-model="user.name" class="form-control"/>
+    </div>
+    <div class="form-group input-group">
+      <span class="input-group-addon">
+      <span class="glyphicon glyphicon-phone"></span></span>
+      <input name="phone" type="number" placeholder="폰 번호" class="form-control" ng-model="user.phone" ng-minlength="11" ng-maxlength="11" required/>
+    </div>
+    <div class="form-group input-group">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+        <input name="email" type="email" placeholder="이메일" class="form-control" ng-model="user.email" required/>
+    </div>
+    <!-- form validation -->
+    <div role="alert">
+      <!-- id -->
+      <p><span class="error" ng-show="signupForm.id.$error.minlength">Id should be at least 6 characters</span></p>
+      <p><span class="error" ng-show="signupForm.id.$error.isAlphaNumeric">Id should be AlphaNumeric</span></p>
+      <!-- pw -->
+      <p><span class="error" ng-show="signupForm.pw.$error.minlength">Password should be at least 8 characters</span></p>
+      <p><span class="error" ng-show="signupForm.pw.$error.hasSpecialChar && !signupForm.pw.$error.minlength && !signupForm.pw.$error.required">pw should contain one or more special characters</span></p>
+      <!-- pwOk -->
+      <p><span class="error" ng-show="signupForm.pwOk.$error.dontMatch && !signupForm.pw.$error.minlength && !signupForm.pw.$error.hasSpecialChar && !signupForm.pwOk.$error.required">Password don't match</span></p>
+      <!-- phone -->
+      <p><span class="error" ng-show="signupForm.phone.$error.number">Valid phone number is required</span></p>
+      <p><span class="error" ng-show="((signupForm.phone.$error.minlength || signupForm.phone.$error.maxlength) && signupForm.phone.$dirty) ">phone number should be 11 digits</span></p>
+      <!-- email -->
+      <p><span class="error" ng-show="signupForm.email.$error.email">Not a valid email!</span></p>
+    </div>
+    <!-- msg after server request -->
+    <div class="form-group">
+        <button class="btn btn-warning btn-lg btn-block" type="submit" ng-disabled="signupForm.$invalid" ng-click="signup()">Sign Up</button><br>
+        <div id="signup_alert" ng-class="[(isSuccess) ? 'alert alert-success' : 'alert alert-danger', (isAlert) ? '' : 'hidden']" ng-bind-html="signupAlert" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        </div>
+        <span><a href="#/login" title="Go Back!!" data-toggle="tooltip" data-placement="top" tooltip>Back to login</a></span>
+    </div>
+</form>

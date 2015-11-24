@@ -1,0 +1,45 @@
+<!-- script -->
+<script type="text/javascript" src="partials/components/signup/signupCtrl.js"></script>
+<script type="text/javascript" src="partials/shared/tooltip.js"></script>
+
+<!-- html -->
+<h2 class="text-center">Register</h2>
+<form id="signup" name="signup" enctype="multipart/form-data" method="post" class="form center-block">
+    <p> Welcome : </p>
+    <div class="form-group input-group">
+    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+    <input name="id" type="text" class="form-control" placeholder="아이디" required>
+    </div>
+    <div class="form-group input-group">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+        <input name="pw" type="password" class="form-control" placeholder="암호" required>
+    </div>
+    <div class="form-group input-group">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+        <input name="pw_ok" type="password" placeholder="암호 확인" class="form-control" required/>
+    </div>
+    <div class="form-group input-group">
+        <label>사진 업로드</label>
+        <input id="file-3" name="image" type="file">
+    </div>
+    <div class="form-group input-group">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-tag"></span></span>
+        <input name="name" type="text" placeholder="이름" class="form-control"/>
+    </div>
+    <div class="form-group input-group">
+      <span class="input-group-addon">
+      <span class="glyphicon glyphicon-phone"></span></span>
+      <input name="phone" type="number" placeholder="폰 번호" class="form-control" required/>
+    </div>
+    <div class="form-group input-group">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+        <input name="email" type="email" placeholder="이메일" class="form-control" required/>
+    </div>
+    <div class="form-group">
+        <button name="submit" class="btn btn-warning btn-lg btn-block" type="submit">Sign Up</button><br>
+        <div id="signup_alert" class="alert hidden" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        </div>
+        <span><a href="#login" title="Go Back!!" data-toggle="tooltip" data-placement="top" tooltip>Back to login</a></span>
+    </div>
+</form>

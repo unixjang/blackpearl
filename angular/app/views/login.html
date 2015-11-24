@@ -1,0 +1,27 @@
+<!--login modal-->
+<div tabindex="-1" aria-hidden="true">
+    <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
+    <h1 class="text-center">Login</h1>
+</div>
+<form role="form" name="form1" class="form center-block">
+    <p> Welcome : {{user.id}} </p>
+    <div class="form-group input-group">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+        <input type="text" class="form-control input-lg" placeholder="아이디" ng-model="user.id" required>
+    </div>
+    <div class="form-group input-group">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+        <input type="password" class="form-control input-lg" placeholder="암호" ng-model="user.pw" required>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-warning btn-lg btn-block" type="submit" ng-disabled="signupForm.$invalid" ng-click="login(user)">Sign In</button><br>
+        <span class="pull-right"><a ng-href="#/signup" title="Register new user!!" data-toggle="tooltip" data-placement="top" tooltip>Register</a></span>
+        <span><a href="" title="You need to sign in to use the BlackPearl." data-toggle="tooltip"
+                 data-placement="top" data-animation="am-fade-and-scale" data-placement="center" bs-modal="modal" tooltip>Need Help?</a>
+        </span>
+    </div>
+    <div id="login_alert" class="alert hidden" role="alert"
+         ng-class="[(isSuccess) ? 'alert alert-success' : 'alert alert-danger', (isAlert) ? '' : 'hidden']" ng-bind-html="loginAlertHTML">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    </div>
+</form>

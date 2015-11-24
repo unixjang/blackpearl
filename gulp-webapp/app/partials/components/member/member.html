@@ -1,0 +1,115 @@
+<!-- style -->
+<style>
+    a:link {text-decoration: none;}
+    a:visited {text-decoration: none;}
+    a:hover {text-decoration: none;}
+    a:active {text-decoration: none;}
+</style>
+<!-- script -->
+<script type="text/javascript" src="partials/components/member/memberCtrl.js"></script>
+
+<!-- html -->
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="text-center text-primary">Member</h1>
+        <p class="text-center">We are a group of skilled individuals.</p>
+        <br>
+    </div>
+</div>
+
+<!-- 검색 -->
+<div class="row">
+    <div class="col-lg-11" style="padding-bottom:20px">
+        <div class="input-group">
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-search"></span>
+            </span>
+            <input id="filter_member" type="text" class="form-control" placeholder="맴버 검색...">
+        </div><!-- /input-group -->
+    </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
+
+<ul class="nav nav-tabs">
+    <li id="bookmark-list" role="presentation" class="active">
+        <a href="javascript:void(0);">
+            <span class="glyphicon glyphicon-bookmark" aria-hidden="true"> Bookmarks</span>
+        </a>
+    </li>
+    <li id="all-list" role="presentation">
+        <a href="javascript:void(0);">
+            <span class="glyphicon glyphicon-th-list" aria-hidden="true"> Members</span>
+        </a>
+    </li>
+</ul>
+
+<!-- 북마크 리스트 -->
+<div id="book_member" class="row" style="margin-top: 30px;">
+    <div class="row text-center" style="margin-top: 30px; color: #31708f; font-size: medium">등록된 회원이 없습니다.</div>
+</div>
+
+<!-- 전체 맴버 리스트 -->
+<div id="all_member" class="row hidden" style="margin-top: 30px;">
+    <a href="#" data-toggle="modal" data-target="#memberModal" data-id="test">
+        <div class="col-xs-6 col-md-3 col-lg-2" style="padding: 15px; text-align:center;">
+            <img src="http://blackpearl.me:52273/local/img/user_empty.png"
+                 class="center-block img-circle img-responsive">
+            <h3 class="text-center">
+                John Doe
+            </h3>
+            <p class="user_id text-center">아이디</p>
+            <br><br>
+        </div>
+    </a>
+</div>
+
+<!-- 맴버 MODAL -->
+<div class="modal fade" id="memberModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">맴버 정보</h4>
+            </div>
+            <form class="form-horizontal" role="form">
+                <div class="modal-body">
+                    <div id="user" class="well well-lg">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <img src="http://blackpearl.me:52273/local/img/user_empty.png"
+                                     class="center-block img-circle user_img"
+                                        style="padding: 15px;" width="250" height="250"/>
+                            </div>
+                            <div class="col-sm-6">
+                                <ul class="list-unstyled" style="line-height:1.77;">
+                                    <!-- 아이디 -->
+                                    <li class="user_id">user_id</li>
+                                    <!-- 이름 -->
+                                    <li class="user_name">name</li>
+                                    <!-- 폰 번호 -->
+                                    <li class="user_phone">phone</li>
+                                    <!-- 이메일 -->
+                                    <li class="user_email">email</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="bookmark_alert" class="alert alert-danger hidden" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-warning btn_bookmark_remove">
+                        <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> 북마크 해제
+                    </a>
+                    <a class="btn btn-info btn_bookmark_add">
+                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span> 북마크
+                    </a>
+                    <a class="btn btn-primary btn_visit" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> 방문하기
+                    </a>
+                    <a class="btn btn-default" data-dismiss="modal">닫기</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

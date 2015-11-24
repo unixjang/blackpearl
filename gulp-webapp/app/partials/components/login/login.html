@@ -1,0 +1,34 @@
+<!-- script -->
+<script type="text/javascript" src="partials/components/login/loginCtrl.js"></script>
+<script type="text/javascript" src="partials/shared/tooltip.js"></script>
+
+<!-- html -->
+<div>
+  <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
+  <h1 class="text-center">Login</h1>
+</div>
+<form role="form" id="form_login" class="form center-block">
+  <p> Welcome : </p>
+  <div class="form-group input-group">
+    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+    <input name="id" type="text" class="form-control input-lg" placeholder="아이디" required>
+  </div>
+  <div class="form-group input-group">
+    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+    <input name="pw" type="password" class="form-control input-lg" placeholder="암호" required>
+  </div>
+  <div class="form-group">
+    <button id="login" class="btn btn-warning btn-lg btn-block" type="button" >Sign In</button><br>
+    <span class="pull-right">
+        <a href="#signup" title="Register new user!!" data-toggle="tooltip" data-placement="top" tooltip>Register</a>
+    </span>
+    <span>
+        <a href="#" title="You need to sign in to use the BlackPearl."
+           data-toggle="tooltip" data-placement="top" data-animation="am-fade-and-scale"
+           data-placement="center" bs-modal="modal" tooltip>Need Help?</a>
+    </span>
+  </div>
+  <div id="login_alert" class="alert hidden" role="alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  </div>
+</form>

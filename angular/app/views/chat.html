@@ -1,0 +1,260 @@
+<!-- style -->
+<style>
+    tr.selected{
+        border-top: 1px dashed #00262C !important;
+        background: #FFFF88 !important;
+    }
+</style>
+
+<script>
+    // 친구 검색 Modal
+    $("#memberInviteModal").on('shown.bs.modal', function () {
+        $("div input").focus();
+    });
+
+    // 채팅 검색 Modal
+    $("#chatSearchModal").on('shown.bs.modal', function () {
+        $("div input").focus();
+    });
+</script>
+
+<!-- html -->
+<div class="container">
+    <div class="row">
+        <!-- left side chat area-->
+        <div class="col-md-9 col-sm-12 col-xs-12">
+            <!-- 채팅 방 : header -->
+            <div class="row" style="margin-top: 15px; margin-bottom: 15px; margin-right: 5px; margin-left: 5px">
+                <div class="btn-group" role="group" aria-label="...">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary dropdown-toggle"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{selectedChatRoom.name}} <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li ng-repeat="chatRoom in chatRooms" ng-click="selectChatRoom(chatRoom)">
+                                <a href="">{{chatRoom.name}}</a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="" data-toggle="modal" data-target="#addChatGrpModal">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 방 추가
+                            </a></li>
+                        </ul>
+                    </div>
+                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#memberInviteModal">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> 초대
+                    </button>
+                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#chatSearchModal">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 글 검색
+                    </button>
+                    <button type="button" class="btn btn-default" ng-click="exitChatRoom()">
+                        <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> 나가기
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="portlet portlet-default">
+                    <!-- ###############  chat : CHAT LIST ###############-->
+                    <div class="panel-collapse collapse in">
+                        <div style="overflow-y: auto; width: auto; height: 30em;" class="portlet-body chat-widget">
+                            <!-- repeatable list -->
+                            <div ng-repeat="chat in chats | filter:chatQuery" style="padding: 15px;" class="media">
+                                <a href="" class="pull-left"><img ng-src="{{chat.img}}" style="width:50px;" alt="" class="media-object img-circle"/></a>
+                                <div style="padding-left: 10px" class="media-body">
+                                    <h4 class="media-heading">{{chat.name}}<span style="font-size:small;" class="small pull-right">{{chat.date}}</span></h4>
+                                    <p>{{chat.msg}}</p>
+                                </div>
+                                <hr/>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 3%; margin-bottom: 5%;" class="portlet-footer">
+                        <form role="form">
+                            <div style="margin-top: 2%" class="input-group">
+                                <div class="input-group-btn btn-group dropup">
+                                    <button type="button" data-toggle="dropdown" aria-expanded="false"
+                                            class="btn btn-default dropdown-toggle">액션<span class="caret"></span></button>
+                                    <ul role="menu" class="dropdown-menu">
+                                        <li><a href="">사진 전송</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="">파일 전송</a></li>
+                                        <li><a href="">동영상 전송</a></li>
+                                    </ul>
+                                </div>
+                                <input type="text" placeholder="메시지를 입력해주세요 ..." class="form-control"/>
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default">&#xC804;&#xC1A1;</button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- right side user area  : 접속 사용자 -->
+        <!-- 모바일이랑 태블릿 사이즈에서는 보이지 않는다 -->
+        <div class="col-md-3 hidden-xs hidden-sm">
+            <div class="panel panel-default">
+                <div class="panel-heading">접속 현황 <span class="badge">0</span></div>
+                <div class="panel-body">
+                    <ul class="list-group" style="overflow-y: auto; width: auto; height: 450px;">
+                        <li class="list-group-item" style="word-wrap:break-word;">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img ng-src="http://localhost:52273/local/img/user_empty.png" class="center-block img-circle img-responsive"/>
+                                </div>
+                                <div class="col-md-8">
+                                    <p>아이디</p>
+                                    <p style="font-size: 12px; color: #f21717;">online</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item" style="word-wrap:break-word;">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img ng-src="http://localhost:52273/local/img/user_empty.png" class="center-block img-circle img-responsive"/>
+                                </div>
+                                <div class="col-md-8">
+                                    <p>아이디</p>
+                                    <p style="font-size: 12px; color: #8a8a8a;">offline</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 방추가 MODAL -->
+<div class="modal fade" id="addChatGrpModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">방 추가</h4>
+            </div>
+            <form class="form-horizontal" role="form">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </span>
+                                <input name="chatgrp_name" type="text" class="form-control" placeholder="추가할 방명을 입력해주세요...">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary" data-dismiss="modal">추가</a>
+                    <a class="btn btn-default" data-dismiss="modal">닫기</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- 채팅 검색 MODAL -->
+<div class="modal fade" id="chatSearchModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">채팅 검색</h4>
+            </div>
+            <form class="form-horizontal" role="form">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <div class="input-group">
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {{chatQueryBy.name}} <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li ng-repeat="chatQueryIndex in chatQueryIndexes"  ng-click="selectChatQuery(chatQueryIndex)">
+                                            <a href="">{{chatQueryIndex.name}}</a></li>
+                                    </ul>
+                                </div><!-- /btn-group -->
+                                <input ng-model="chatQuery[chatQueryBy.value]" type="text" class="form-control" placeholder="검색어를 입력해주세요..">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-default" data-dismiss="modal">닫기</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- 초대하기 MODAL -->
+<div class="modal fade" id="memberInviteModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="overflow-y: scroll; height: 50em; width: 100%; position: absolute;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">초대하기</h4>
+            </div>
+            <form class="form-horizontal" role="form">
+                <div class="modal-body">
+                    <div class="col-sm-12" style="margin-bottom: 15px">
+                        <div class="input-group">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{memberQueryBy.name}} <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li ng-repeat="memberQueryIndex in memberQueryIndexes"  ng-click="selectMemberQuery(memberQueryIndex)">
+                                        <a href="">{{memberQueryIndex.name}}</a></li>
+                                </ul>
+                            </div><!-- /btn-group -->
+                            <input ng-model="memberQuery[memberQueryBy.value]" type="text" class="form-control" placeholder="검색어를 입력해주세요..">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <!-- 시작 : 맴버 테이블 UI 작업하기 -->
+                    <div>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <td><input type="checkbox" ng-click="checkAllMembers(memberChecked)" ng-model="memberChecked"></td>
+                                    <th>사진</th>
+                                    <th>아이디</th>
+                                    <th>이름</th>
+                                    <th class="text-left hidden-xs hidden-sm">전화번호</th>
+                                    <th class="text-left hidden-xs hidden-sm">이메일</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="member in members | filter:memberQuery">
+                                    <td><input type="checkbox" ng-model="member.selected"></td>
+                                    <td><img ng-src="{{member.img}}" width="30em" height="30em" /></td>
+                                    <td>{{member.id}}</td>
+                                    <td>{{member.name}}</td>
+                                    <td class="text-left hidden-xs hidden-sm">{{member.phone}}</td>
+                                    <td class="text-left hidden-xs hidden-sm">{{member.email}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- 끝 : 맴버 테이블 -->
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary" data-dismiss="modal">초대하기</a>
+                    <a class="btn btn-default" data-dismiss="modal">닫기</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+<!-- script -->
+<script type="text/javascript" src="partials/components/profile/profileCtrl.js"></script>
+
+<!-- html -->
+<div class="container">
+    <div class="row">
+        <div id="user" class="col-md-6">
+            <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png"
+                 class="img-responsive center-block" style="margin-top: 10px; padding:20px">
+            <p id="id" class="text-center">아이디</p>
+        </div>
+        <div class="col-md-6" style="margin-top: 10px;">
+            <form id="update_pw" name="update_pw" method="post" class="form center-block">
+                <div class="form-group input-group">
+                    <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-lock"></span>
+                    </span>
+                    <input name="prev_pw" type="password" class="form-control" placeholder="이전 암호">
+                </div>
+                <div class="form-group input-group">
+                    <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-lock"></span>
+                    </span>
+                    <input name="pw" type="password" class="form-control" placeholder="암호">
+                </div>
+                <div class="form-group input-group">
+                    <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-lock"></span>
+                    </span>
+                    <input name="pw_ok" type="password" class="form-control" placeholder="암호 확인">
+                </div>
+                <div class="form-group">
+                    <button name="submit" class="btn btn-warning btn-lg btn-block" type="submit">암호 변경</button>
+                </div>
+            </form>
+            <div id="password_update_alert" class="alert hidden" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            </div>
+
+            <form id="update_profile" name="update_proflie" enctype="multipart/form-data" method="post" class="form center-block">
+                <div class="form-group input-group">
+                    <label>사진 변경</label>
+                    <input name="image" type="file" id="file-3">
+                </div>
+                <div class="form-group input-group">
+                    <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-tag"></span>
+                    </span>
+                    <input name="name" type="text" placeholder="이름" class="form-control">
+                </div>
+                <div class="form-group input-group">
+                    <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-phone"></span>
+                    </span>
+                    <input name="phone" type="text" placeholder="폰 번호" class="form-control"
+                           required="">
+                </div>
+                <div class="form-group input-group">
+                    <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-envelope"></span>
+                    </span>
+                    <input name="email" type="email" placeholder="이메일" class="form-control"
+                           required="">
+                </div>
+                <div class="form-group">
+                    <button name="submit" class="btn btn-primary btn-lg btn-block" type="submit">프로필 수정</button>
+                </div>
+            </form>
+            <div id="profile_update_alert" class="alert hidden" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            </div>
+        </div>
+    </div>
+</div>
